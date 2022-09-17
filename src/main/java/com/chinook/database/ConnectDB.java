@@ -5,22 +5,14 @@ import java.sql.DriverManager;
 import java.sql.SQLException;
 
 public class ConnectDB {
-    public static void connect(){
-        Connection conn = null;
-        try {
-            String dbURL = "jdbc:sqlite:src/data/chinook.db";
-            conn = DriverManager.getConnection(dbURL);
+    public static Connection connect(){
+        String dbURL = "jdbc:sqlite:src/data/chinook.db";
+        try (Connection conn = DriverManager.getConnection(dbURL)) {
             System.out.println("Connection to db established.");
+            return conn;
         } catch (SQLException e) {
             e.printStackTrace();
-        } finally {
-            try {
-                if(conn != null){
-                    conn.close();
-                }
-            } catch (SQLException e) {
-                e.printStackTrace();
-            }
         }
+        return null;
     }
 }
