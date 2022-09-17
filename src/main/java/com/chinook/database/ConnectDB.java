@@ -7,12 +7,13 @@ import java.sql.SQLException;
 public class ConnectDB {
     public static Connection connect(){
         String dbURL = "jdbc:sqlite:src/data/chinook.db";
-        try (Connection conn = DriverManager.getConnection(dbURL)) {
+        Connection connection = null;
+        try {
+            connection = DriverManager.getConnection(dbURL);
             System.out.println("Connection to db established.");
-            return conn;
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        return null;
+        return connection;
     }
 }
